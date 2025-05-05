@@ -4,7 +4,25 @@ import 'package:rxdart/rxdart.dart';
 import '../../../base/base_page_view_model.dart';
 
 class ArticleEnquiryViewModel extends BasePageViewModel {
+  final FetchNewsListUseCase _articleEnquiryUseCase;
   final BehaviorSubject<String> _selectedOption = BehaviorSubject.seeded("E");
+
+  final PublishSubject<FetchNewsListUseCaseParams> _articleEnquiryRequest =
+  PublishSubject();
+
+  final PublishSubject<List<NewsArticleEntity>> _articleEnquiryResponse =
+  PublishSubject();
+
+  Stream<List<NewsArticleEntity>> get articleEnquiryStream => _articleEnquiryResponse.stream;
+
+  NewsListViewModel(this._newsListUseCase) {
+    _newsListRequest.listen((value) {
+      _newsListUseCase.execute(params: value).asStream().listen((event) {
+        event.fold((l) => null, (r) => _newsListResponse.add(r));
+      });
+    });
+  }
+
 
   Stream<String> get selectedOptionStream => _selectedOption.stream;
 

@@ -1,0 +1,68 @@
+
+<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope">
+    <env:Header/>
+    <env:Body>
+        <n0:ZaiArticleEnquiryResponse xmlns:n0="urn:sap-com:document:sap:soap:functions:mc-style">
+            <ArticleDetails>
+                <Material>000000000000000080</Material>
+                <Plant/>
+                <MatlGroup/>
+                <Matkl>001016001</Matkl>
+                <BaseUom>EA</BaseUom>
+                <EanUpc>8901725121716</EanUpc>
+                <Extmatlgrp>AASHIRVAAD</Extmatlgrp>
+                <MatlCat>00</MatlCat>
+                <MatlDescr/>
+                <MatlDesc>Aashirvaad Atta 10kg</MatlDesc>
+                <Status/>
+                <Numerator>1.0</Numerator>
+                <Stock>0.0</Stock>
+                <CondValue>0.0</CondValue>
+                <Condcurr/>
+                <NcondValue>0.0</NcondValue>
+                <Vendor/>
+                <VendorName/>
+                <AltUnit>EA</AltUnit>
+                <Promo/>
+                <StockInTransit>0.0</StockInTransit>
+                <StockInSsite>0.0</StockInSsite>
+                <StatusInSsite/>
+                <Netpr>0.0</Netpr>
+                <LstatusInSite/>
+                <LstatusInSsite/>
+                <InpTaxcode/>
+                <RecsiteSernp/>
+                <SupsiteSernp/>
+                <DelFlag/>
+                <Ecomm/>
+                <Proptx/>
+                <Spropnr/>
+                <Propnr/>
+                <Baynr/>
+                <Minbe>0.0</Minbe>
+                <Sobst>0.0</Sobst>
+                <Map>0.0</Map>
+                <SsMap>0.0</SsMap>
+                <InfoDel/>
+                <PromoEndDate>0000-00-00</PromoEndDate>
+                <Maabc/>
+                <Effpr>0.0</Effpr>
+                <Mrp>0.0</Mrp>
+                <MrpCur/>
+            </ArticleDetails>
+            <Return>
+                <item>
+                    <Type>W</Type>
+                    <Code>AQ006</Code>
+                    <Message>Inventory document already posted</Message>
+                    <LogNo/>
+                    <LogMsgNo>000000</LogMsgNo>
+                    <MessageV1>Inventory document already posted</MessageV1>
+                    <MessageV2/>
+                    <MessageV3/>
+                    <MessageV4/>
+                </item>
+            </Return>
+        </n0:ZaiArticleEnquiryResponse>
+    </env:Body>
+</env:Envelope>

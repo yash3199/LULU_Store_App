@@ -50,10 +50,15 @@ dependencies:
   dio: ^5.8.0+1
   retrofit: ^4.4.2
   xml: ^6.5.0
+  path_provider: ^2.1.5
+  json_annotation: ^4.9.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner: any
+  retrofit_generator: any
+  json_serializable: ^6.1.4
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -77,6 +82,7 @@ flutter:
   assets:
     - assets/translations/
     - assets/images/
+    - assets/xml/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
