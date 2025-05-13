@@ -37,6 +37,4 @@ class _ReservationViewState extends BaseStatefulPage<ReservationViewModel, Reser
     return false;
   }
 
-
-
 }

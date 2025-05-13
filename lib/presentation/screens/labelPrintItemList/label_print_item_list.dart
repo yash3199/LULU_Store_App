@@ -33,6 +33,7 @@ class _LabelPrintItemListViewState extends BaseStatefulPage<
 
   final scanner = ScannerService();
   final TextEditingController _scannerController = TextEditingController();
+  final FocusNode _scannerFocusNode = FocusNode();
 
   @override
   void initState() {
@@ -43,17 +44,11 @@ class _LabelPrintItemListViewState extends BaseStatefulPage<
 
   void _handleScanResult(String scannedData) {
     print("Callback received scanned data: $scannedData");
-    setState(() {
-      _scannerController.text = scannedData; // Update the controller
-    });
+      _scannerController.text = scannedData;
   }
 
 
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   PreferredSizeWidget buildAppbar() {
@@ -109,9 +104,16 @@ class _LabelPrintItemListViewState extends BaseStatefulPage<
                     child: Padding(
                         padding: EdgeInsets.only(top: AppDimensions.paddingMedium),
                         child: TextField(
+                          focusNode: _scannerFocusNode,
                           controller: _scannerController,
-                          onTap: () => scanner.openScanner(context, _handleScanResult),
+                          // onTap: () => scanner.openScanner(context, _handleScanResult),
                           decoration: InputDecoration(
+                            prefixIcon: GestureDetector(
+                                onTap: (){
+                                  FocusScope.of(context).unfocus();
+                                  scanner.openScanner(context, _handleScanResult);
+                                },
+                                child: Icon(Icons.qr_code_scanner_outlined)),
                             hintText: "Scan Barcode",
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),

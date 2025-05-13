@@ -37,7 +37,7 @@ class App extends ConsumerWidget {
                   locale: context.locale,
                   debugShowCheckedModeBanner: false,
                   theme: snapshot==true? AppThemes.darkTheme: AppThemes.lightTheme,
-                  initialRoute: RoutePaths.loginView,
+                  initialRoute: RoutePaths.register,
                   onGenerateRoute: AppRouter.onGenerateRoute,
                 );
               }

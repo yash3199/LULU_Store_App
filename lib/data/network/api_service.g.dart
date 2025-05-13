@@ -38,6 +38,7 @@ class _ArticleEnquiryApiService implements ArticleEnquiryApiService {
     final _result = await _dio.fetch(_options);
     final _value = _result.data;
     final httpResponse = HttpResponse(_value, _result);
+    print("coming here in api call ================> ${httpResponse}");
     return httpResponse;
   }
 

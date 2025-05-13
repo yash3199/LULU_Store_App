@@ -2,23 +2,27 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:rxdart/rxdart.dart';
 import '../../../base/base_page_view_model.dart';
+import '../../../data/entity/articleEnquiry/article_response_entity.dart';
+import '../../../domain/usecases/articleEnquiry/fetch_article_enquiry_usecases.dart';
 
 class ArticleEnquiryViewModel extends BasePageViewModel {
-  final FetchNewsListUseCase _articleEnquiryUseCase;
+
+  final FetchArticleEnquiryUseCase _articleEnquiryUseCase;
+
   final BehaviorSubject<String> _selectedOption = BehaviorSubject.seeded("E");
 
-  final PublishSubject<FetchNewsListUseCaseParams> _articleEnquiryRequest =
+  final PublishSubject<FetchArticleEnquiryUseCaseParams> _articleEnquiryRequest =
   PublishSubject();
 
-  final PublishSubject<List<NewsArticleEntity>> _articleEnquiryResponse =
+  final PublishSubject<ArticleResponseEntity> _articleEnquiryResponse =
   PublishSubject();
 
-  Stream<List<NewsArticleEntity>> get articleEnquiryStream => _articleEnquiryResponse.stream;
+  Stream<ArticleResponseEntity> get articleEnquiryStream => _articleEnquiryResponse.stream;
 
-  NewsListViewModel(this._newsListUseCase) {
-    _newsListRequest.listen((value) {
-      _newsListUseCase.execute(params: value).asStream().listen((event) {
-        event.fold((l) => null, (r) => _newsListResponse.add(r));
+  ArticleEnquiryViewModel(this._articleEnquiryUseCase) {
+    _articleEnquiryRequest.listen((value) {
+      _articleEnquiryUseCase.execute(params: value).asStream().listen((event) {
+        event.fold((l) => null, (r) => _articleEnquiryResponse.add(r));
       });
     });
   }
@@ -35,10 +39,9 @@ class ArticleEnquiryViewModel extends BasePageViewModel {
 
   final TextEditingController ea1 = TextEditingController();
 
-  final TextEditingController eanNoController  = TextEditingController();
+   final TextEditingController eanNoController  = TextEditingController();
 
-
-  final BehaviorSubject<bool> _itemAdded = BehaviorSubject.seeded(false);
+   final BehaviorSubject<bool> _itemAdded = BehaviorSubject.seeded(false);
 
   Stream<bool> get itemAddedStream => _itemAdded.stream;
 
@@ -53,6 +56,11 @@ class ArticleEnquiryViewModel extends BasePageViewModel {
 
   bool get saveItemValue => _saveItem.value;
 
+
+  void getArticleDetail(String ean) {
+    print("coming here");
+    _articleEnquiryRequest.add(FetchArticleEnquiryUseCaseParams(ean));
+  }
 
 
 

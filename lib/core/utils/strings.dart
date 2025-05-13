@@ -25,5 +25,8 @@ class AppStrings {
   static String save = "save";
   static String exit = "exit";
   static String wastage = "wastage";
+  static String enterSiteId = "enterSiteId";
+  static String enterCompanyCode = "enterCompanyCode";
+  static String register = "register";
 
 }

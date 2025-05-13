@@ -17,3 +17,12 @@ abstract class BaseError {
 class NetworkError extends BaseError {
   NetworkError({required Exception cause}) : super(cause: cause);
 }
+
+class ValidationError extends BaseError {
+  final String message;
+
+  ValidationError({required this.message}) : super(cause: Exception(message));
+
+  @override
+  String toString() => message;
+}

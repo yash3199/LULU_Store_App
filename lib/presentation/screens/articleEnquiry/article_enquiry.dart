@@ -12,7 +12,6 @@ import '../../../core/utils/commonWidget/common_scanner_class_singleton.dart';
 import '../../../core/utils/is_zebra_device.dart';
 import '../../../core/utils/strings.dart';
 import '../../../di/app/feature_module.dart';
-import 'api_temporary/api_service_article.dart';
 import 'article_enquiry_view.dart';
 import 'article_enquiry_view_model.dart';
 
@@ -27,76 +26,78 @@ class ArticleEnquiryView extends BasePage<ArticleEnquiryViewModel> {
 
 class _ArticleEnquiryViewState extends BaseStatefulPage<ArticleEnquiryViewModel, ArticleEnquiryView> {
   final scanner = ScannerService();
-  final ArticleApiService _articleService = ArticleApiService();
+  bool _isInitialized = false;
 
   @override
   void initState() {
     super.initState();
-    scanner.initScanner(_handleScanResult); // Pass the callback when initializing scanner
+    scanner.initScanner(_handleScanResult);
+
   }
 
-  // void _handleScanResult(String scannedData) {
-  //   print("Callback received scanned data: $scannedData");
-  //    setState(() {
-  //     print("coming here in changing eannocontroller text");
-  //   if (getViewModel().eanNoController.text != scannedData) {
-  //       getViewModel().eanNoController.text = scannedData;
-  //   }
-  //     //getViewModel().eanNoController.clear();
-  //     //getViewModel().eanNoController.text=scannedData;
-  //   // getViewModel().eanNoController.value = TextEditingValue(
-  //   //   text: scannedData,
-  //   //   selection: TextSelection.collapsed(offset: scannedData.length),
-  //   // );
-  //    });
-  // }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
 
-  void _handleScanResult(String scannedData) async {
-    print("Callback received scanned data: $scannedData");
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!_isInitialized) {
+        scanner.initScanner(_handleScanResult);
 
-    setState(() {
-      getViewModel().eanNoController.text = scannedData;
+        // Optional: Clear or reinit controller to force rebuild on revisit
+        getViewModel().eanNoController.text = '';
+
+        _isInitialized = true;
+      }
+
     });
+  }
 
 
-    const dynamicPath =
-        '/sap/bc/srt/rfc/sap/zai_article_enquiry/750/zai_article_enquiry/zai_article_enquiry';
-
-    try {
-      final response = await _articleService.fetchArticleData(scannedData, dynamicPath);
-
-      print("Status Code: ${response.statusCode}");
-      print("SOAP Response: ${response.data}");
-
-      // TODO: Parse or show response in UI
-    } catch (e) {
-      print("API Error: $e");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Failed to fetch article data")),
-      );
-    }
 
 
+  void _handleScanResult(String scannedData) {
+    print("Scanned data: $scannedData");
+
+    if (!mounted) return; // Prevent calling setState on disposed widget
+
+      print("coming here !!!!!!!!1");
+      getViewModel().eanNoController.text = "data";
+      print("text after scaniing is============> ${getViewModel().eanNoController.text}");
+    
   }
 
 
 
 
 
-  // @override
-  // void dispose() {
-  //   getViewModel().eanNoController.dispose();
-  //   super.dispose();
-  // }
+   // @override
+   // void dispose() {
+   //   getViewModel().eanNoController.dispose();
+   //   super.dispose();
+   // }
 
   @override
   PreferredSizeWidget buildAppbar() {
-    print('ddd ${getViewModel().eanNoController}');
     return CommonBarcodeScannerAppBar(
       type: widget.data ?? "ArticleEnquiry",
       getViewModel: getViewModel,
       scannerController: getViewModel().eanNoController,
-      openScanner: () => scanner.openScanner(context, _handleScanResult), // Pass the callback when opening scanner
+      // openScanner: ()=>{getViewModel().eanNoController.text = "data",
+      //   print("text after scaniing is============> ${getViewModel().eanNoController.text}")},
+      //openScanner: () => scanner.openScanner(context, _handleScanResult), // Pass the callback when opening scanner
+        openScanner: () {
+          scanner.openScanner(context, (scannedText) async {
+            await Future.delayed(Duration(milliseconds: 100)); // allow async scanner response
+
+            if (!context.mounted) return;
+
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              getViewModel().eanNoController.text = scannedText;
+              print("Scanned text after scanning is => ${getViewModel().eanNoController.text}");
+            });
+          });
+        }
+
     );
   }
 

@@ -130,9 +130,8 @@ abstract class CoreBasePageState<VM, T extends StatefulWidget> extends State<T>
                                   AppStrings.settings.tr(),
                                   style: TextStyle(
                                       fontSize: AppDimensions.fontLarge,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily:
-                                          GoogleFonts.notoSans().fontFamily),
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: GoogleFonts.notoSans().fontFamily),
                                 ),
                               )
                             ],

@@ -34,12 +34,12 @@ class _ZebraBarcodeScannerState extends State<ZebraBarcodeScanner> {
     });
   }
 
-  @override
-  void dispose() {
-    _onScanSubscription?.cancel();
-    //_dataWedge.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _onScanSubscription?.cancel();
+  //   //_dataWedge.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {

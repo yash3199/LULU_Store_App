@@ -14,6 +14,7 @@ import '../../presentation/screens/labelPrintResult/label_print_result.dart';
 import '../../presentation/screens/login/login.dart';
 import '../../presentation/screens/physicalInventory/physical_inventory.dart';
 import '../../presentation/screens/productionOrder/production_order.dart';
+import '../../presentation/screens/registration/registration.dart';
 import '../../presentation/screens/reservation/reservation.dart';
 import '../../presentation/screens/returnPo/return_po.dart';
 import '../../presentation/screens/stockTransportOrder/stock_transport_order.dart';
@@ -99,6 +100,12 @@ class AppRouter {
         return CupertinoPageRoute(
             builder: (context) => ProductionOrderView(),
             settings: RouteSettings(name: RoutePaths.productionOrder));
+      case RoutePaths.register:
+         return CupertinoPageRoute(
+             builder: (context) => RegistrationView(),
+             settings: RouteSettings(name: RoutePaths.register)
+         );
+
       default:
         return CupertinoPageRoute(
           builder: (context) {

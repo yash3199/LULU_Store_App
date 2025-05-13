@@ -42,7 +42,6 @@ class ScannerService {
       );
 
       if (scannedData != null) {
-        print("scanned from mobile $scannedData");
         onScanResultCallback(scannedData);
       }
     } else {

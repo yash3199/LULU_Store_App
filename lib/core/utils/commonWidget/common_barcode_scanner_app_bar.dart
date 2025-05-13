@@ -93,7 +93,6 @@ class CommonBarcodeScannerAppBar extends StatelessWidget implements PreferredSiz
             stream: getViewModel().selectedOptionStream,
             initialData: getViewModel().selectedOption,
             dataBuilder: (context, snapshot) {
-            //  print("")
               return Row(
                 children: [
                   OptionButton(
@@ -120,35 +119,40 @@ class CommonBarcodeScannerAppBar extends StatelessWidget implements PreferredSiz
                           top: AppDimensions.paddingMedium),
                       child: AbsorbPointer(
                         absorbing: false,
-                        child: TextField(
-                          focusNode: _scannerFocusNode,
-                          controller: scannerController,
-                          decoration: InputDecoration(
-                            hintText: "searchHint",
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .dividerColor)),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .dividerColor)),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .dividerColor)),
-                            prefixIcon: GestureDetector(
-                                onTap: (){
-                                  scannerController.clear();
-                                  openScannerAndHandle(context);
-                                },
-                                child: Icon(Icons.qr_code_scanner_outlined)),
-                            contentPadding:
-                            EdgeInsets.symmetric(vertical: 10),
-                          ),
+                        child: StatefulBuilder(
+                          builder: (context, setState) {
+                            return TextField(
+                              key: ValueKey(scannerController.text),
+                              focusNode: _scannerFocusNode,
+                              controller: scannerController,
+                              decoration: InputDecoration(
+                                hintText: _getSearchHint(snapshot ?? "E"),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: BorderSide(
+                                        color: Theme.of(context)
+                                            .dividerColor)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: BorderSide(
+                                        color: Theme.of(context)
+                                            .dividerColor)),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: BorderSide(
+                                        color: Theme.of(context)
+                                            .dividerColor)),
+                                prefixIcon: GestureDetector(
+                                    onTap: (){
+                                      //scannerController.clear();
+                                      openScannerAndHandle(context);
+                                    },
+                                    child: Icon(Icons.qr_code_scanner_outlined)),
+                                contentPadding:
+                                EdgeInsets.symmetric(vertical: 10),
+                              ),
+                            );
+                          }
                         ),
                       ),
                     ),

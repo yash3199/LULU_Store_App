@@ -16,5 +16,6 @@ class RoutePaths {
   static const String reservation = "/reservation";
   static const String productionOrder = "/productionOrder";
   static const String wastage = "/wastage";
+  static const String register = "/register";
 
 }

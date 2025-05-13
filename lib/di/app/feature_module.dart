@@ -13,10 +13,12 @@ import '../../presentation/screens/labelPrintResult/label_print_result_view_mode
 import '../../presentation/screens/login/login_view_model.dart';
 import '../../presentation/screens/physicalInventory/physical_inventory_view_model.dart';
 import '../../presentation/screens/productionOrder/production_order_view_model.dart';
+import '../../presentation/screens/registration/registration_view_model.dart';
 import '../../presentation/screens/reservation/reservation_view_model.dart';
 import '../../presentation/screens/returnPo/return_po_view_model.dart';
 import '../../presentation/screens/stockTransportOrder/stock_transport_order_view_model.dart';
 import '../../presentation/screens/wastage/wastage_view_model.dart';
+import '../usecase/article_enquiry_module.dart';
 
 final themeViewModelProvider =
     ChangeNotifierProvider.autoDispose<ThemeViewModel>(
@@ -28,7 +30,7 @@ final themeViewModelProvider =
 final articleViewModelProvider =
     ChangeNotifierProvider.autoDispose<ArticleEnquiryViewModel>(
   (ref) {
-    return ArticleEnquiryViewModel();
+    return ArticleEnquiryViewModel(ref.read(fetchArticleEnquiryUseCaseProvider(('117465', 'may@2025'))));
   },
 );
 
@@ -104,4 +106,9 @@ final profileSettingsViewModelProvider =
 final loginViewModelProvider =
 ChangeNotifierProvider.autoDispose<LoginViewModel>((ref) {
   return LoginViewModel();
+});
+
+final registerViewModelProvider =
+ChangeNotifierProvider.autoDispose<RegistrationViewModel>((ref) {
+  return RegistrationViewModel();
 });
