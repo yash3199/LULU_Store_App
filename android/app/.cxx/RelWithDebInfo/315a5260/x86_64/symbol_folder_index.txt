@@ -1,0 +1,1 @@
+/Users/neosoft/StudioProjects/lulu_store_app/build/app/intermediates/cxx/RelWithDebInfo/315a5260/obj/x86_64

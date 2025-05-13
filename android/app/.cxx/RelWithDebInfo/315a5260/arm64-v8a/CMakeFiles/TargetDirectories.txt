@@ -1,0 +1,2 @@
+/Users/neosoft/StudioProjects/lulu_store_app/android/app/.cxx/RelWithDebInfo/315a5260/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/neosoft/StudioProjects/lulu_store_app/android/app/.cxx/RelWithDebInfo/315a5260/arm64-v8a/CMakeFiles/rebuild_cache.dir
