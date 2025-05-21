@@ -41,6 +41,15 @@ class ArticleEnquiryViewModel extends BasePageViewModel {
 
    final TextEditingController eanNoController  = TextEditingController();
 
+
+  final BehaviorSubject<bool> _barcodePressed = BehaviorSubject.seeded(false);
+
+  Stream<bool> get barcodePressedStream => _barcodePressed.stream;
+
+  bool get barcodePressedValue => _barcodePressed.value;
+
+
+
    final BehaviorSubject<bool> _itemAdded = BehaviorSubject.seeded(false);
 
   Stream<bool> get itemAddedStream => _itemAdded.stream;
@@ -76,10 +85,18 @@ class ArticleEnquiryViewModel extends BasePageViewModel {
     _saveItem.add(val);
   }
 
-
-  @override
-  void dispose() {
-    super.dispose();
-    _selectedOption.close();
+  void changeBarcodeSelection(bool val){
+    print("changing barcode value ${val}");
+    _barcodePressed.add(val);
   }
+
+
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   _selectedOption.close();
+  //   eanNoController.clear();
+  //   _barcodePressed.close();
+  //   _saveItem.close();
+  // }
 }

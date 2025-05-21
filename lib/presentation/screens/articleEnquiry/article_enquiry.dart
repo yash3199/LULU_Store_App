@@ -24,80 +24,61 @@ class ArticleEnquiryView extends BasePage<ArticleEnquiryViewModel> {
   State<ArticleEnquiryView> createState() => _ArticleEnquiryViewState();
 }
 
-class _ArticleEnquiryViewState extends BaseStatefulPage<ArticleEnquiryViewModel, ArticleEnquiryView> {
+class _ArticleEnquiryViewState
+    extends BaseStatefulPage<ArticleEnquiryViewModel, ArticleEnquiryView> {
   final scanner = ScannerService();
   bool _isInitialized = false;
 
   @override
   void initState() {
     super.initState();
-    scanner.initScanner(_handleScanResult);
-
+    scanner.initScanner();
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!_isInitialized) {
-        scanner.initScanner(_handleScanResult);
-
-        // Optional: Clear or reinit controller to force rebuild on revisit
-        getViewModel().eanNoController.text = '';
-
-        _isInitialized = true;
-      }
-
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   if (zed) {
+    //     scanner.initScanner(_handleScanResult);
+    //     getViewModel().eanNoController.text = '';
+    //
+    //     _isInitialized = true;
+    //   }
+    // });
   }
 
-
-
-
-  void _handleScanResult(String scannedData) {
-    print("Scanned data: $scannedData");
-
-    if (!mounted) return; // Prevent calling setState on disposed widget
-
-      print("coming here !!!!!!!!1");
-      getViewModel().eanNoController.text = "data";
-      print("text after scaniing is============> ${getViewModel().eanNoController.text}");
-    
-  }
-
-
-
-
-
-   // @override
-   // void dispose() {
-   //   getViewModel().eanNoController.dispose();
-   //   super.dispose();
-   // }
+  // void _handleScanResult(String scannedData) async {
+  //   print("Scanned data=========>: $scannedData");
+  //   //if (!mounted) return;
+  //   print("coming here !!!!!!!!1");
+  //    getViewModel().eanNoController.text = scannedData;
+  //   getViewModel().changeBarcodeSelection(!getViewModel().barcodePressedValue);
+  //   print(
+  //       "text after scanning is============> ${getViewModel().eanNoController.text}");
+  //   print(
+  //       "text string  after scanning is============> ${getViewModel().barcodePressedValue}");
+  // }
 
   @override
   PreferredSizeWidget buildAppbar() {
     return CommonBarcodeScannerAppBar(
       type: widget.data ?? "ArticleEnquiry",
-      getViewModel: getViewModel,
-      scannerController: getViewModel().eanNoController,
-      // openScanner: ()=>{getViewModel().eanNoController.text = "data",
-      //   print("text after scaniing is============> ${getViewModel().eanNoController.text}")},
-      //openScanner: () => scanner.openScanner(context, _handleScanResult), // Pass the callback when opening scanner
-        openScanner: () {
-          scanner.openScanner(context, (scannedText) async {
-            await Future.delayed(Duration(milliseconds: 100)); // allow async scanner response
-
-            if (!context.mounted) return;
-
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              getViewModel().eanNoController.text = scannedText;
-              print("Scanned text after scanning is => ${getViewModel().eanNoController.text}");
-            });
-          });
-        }
-
+      // openScanner: () => scanner.openScanner(
+      //     context, _handleScanResult),
+      //   openScanner: () {
+      //     scanner.openScanner(context, (scannedText) async {
+      //       await Future.delayed(Duration(milliseconds: 100)); // allow async scanner response
+      //
+      //       if (!context.mounted) return;
+      //
+      //       WidgetsBinding.instance.addPostFrameCallback((_) {
+      //         getViewModel().eanNoController.text = scannedText;
+      //         print("Scanned text after scanning is => ${getViewModel().eanNoController.text}");
+      //       });
+      //     });
+      //   }
     );
   }
 
@@ -121,4 +102,3 @@ class _ArticleEnquiryViewState extends BaseStatefulPage<ArticleEnquiryViewModel,
     return true;
   }
 }
-

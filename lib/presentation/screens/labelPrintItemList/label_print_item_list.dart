@@ -38,7 +38,7 @@ class _LabelPrintItemListViewState extends BaseStatefulPage<
   @override
   void initState() {
     super.initState();
-    scanner.initScanner(_handleScanResult);
+    scanner.initScanner();
   }
 
 
@@ -111,7 +111,7 @@ class _LabelPrintItemListViewState extends BaseStatefulPage<
                             prefixIcon: GestureDetector(
                                 onTap: (){
                                   FocusScope.of(context).unfocus();
-                                  scanner.openScanner(context, _handleScanResult);
+                                  //scanner.openScanner(context);
                                 },
                                 child: Icon(Icons.qr_code_scanner_outlined)),
                             hintText: "Scan Barcode",
